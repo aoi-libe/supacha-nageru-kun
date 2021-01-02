@@ -1,0 +1,32 @@
+{
+  "name": "スパチャなげる君",
+  "version": "1.0",
+  "description": "スパチャコメントをChatworkに連携",
+  "browser_action": {
+    "default_title": "popup",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "images/risu_48.png"
+  },
+  "permissions": [
+    "storage",
+    "https://api.chatwork.com/*"
+  ],
+  "background": {
+    "scripts": ["storage.js", "background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["jquery.min.js", "storage.js", "script.js"],
+	    "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true    
+  },
+  "manifest_version": 2
+}
