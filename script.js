@@ -24,9 +24,9 @@ async function main() {
     send(
       $target,
       id,
-      encodeURI(name),
-      encodeURI(purchase_amount),
-      encodeURI(text)
+      name,
+      purchase_amount,
+      text
     );
   });
   // Super Stickers
@@ -43,9 +43,9 @@ async function main() {
     send(
       $target,
       id,
-      encodeURI(name),
-      encodeURI(purchase_amount),
-      encodeURI(text)
+      name,
+      purchase_amount,
+      text
     );
   });
 }
