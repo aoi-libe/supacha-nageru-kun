@@ -1,15 +1,15 @@
 async function initialize() {
-  const api_key = await getApiKey();
-  const room_id = await getRoomId();
-  $("#api_key").val(api_key);
-  $("#room_id").val(room_id);
+  const apiKey = await getApiKey();
+  const roomId = await getRoomId();
+  $("#api_key").val(apiKey);
+  $("#room_id").val(roomId);
 }
 
 function saveOptions() {
-  const api_key = $("#api_key").val();
-  const room_id = $("#room_id").val();
-  setApiKey(api_key);
-  setRoomId(room_id);
+  const apiKey = $("#api_key").val();
+  const roomId = $("#room_id").val();
+  setApiKey(apiKey);
+  setRoomId(roomId);
   // 保存できたら、画面にメッセージを表示(1秒だけ)
   $("#status").text("Options saved.");
   setTimeout(function () {

@@ -1,7 +1,7 @@
 // 処理中のメッセージIDを管理
-const processing_set = new Set();
+const processingSet = new Set();
 // Chatwork連携済みのメッセージIDを管理
-const posted_set = new Set();
+const postedSet= new Set();
 
 async function main() {
   const active = await getActive();
@@ -15,17 +15,17 @@ async function main() {
     const $target = $(element);
     const id = $target.prop("id");
     const name = $target.find("#author-name").text();
-    const purchase_amount = $target.find("#purchase-amount").text();
+    const amount = $target.find("#purchase-amount").text();
     const text = $target.find("#message").text();
-    if (processing_set.has(id) || posted_set.has(id)) {
+    if (processingSet.has(id) || postedSet.has(id)) {
       return;
     }
-    processing_set.add(id);
+    processingSet.add(id);
     send(
       $target,
       id,
       name,
-      purchase_amount,
+      amount,
       text
     );
   });
@@ -34,28 +34,28 @@ async function main() {
     const $target = $(element);
     const id = $target.prop("id");
     const name = $target.find("#author-name").text();
-    const purchase_amount = $target.find("#purchase-amount-chip").text();
+    const amount = $target.find("#purchase-amount-chip").text();
     const text = "";
-    if (processing_set.has(id) || posted_set.has(id)) {
+    if (processingSet.has(id) || postedSet.has(id)) {
       return;
     }
-    processing_set.add(id);
+    processingSet.add(id);
     send(
       $target,
       id,
       name,
-      purchase_amount,
+      amount,
       text
     );
   });
 }
 
-function send($target, id, name, purchase_amount, text) {
-  const message = `[info][title]${name}[/title]${purchase_amount}\n\n${text}[/info]`;
+function send($target, id, name, amount, text) {
+  const message = `[info][title]${name}[/title]${amount}\n\n${text}[/info]`;
   chrome.runtime.sendMessage(message, (response) => {
-    processing_set.delete(id);
+    processingSet.delete(id);
     if (response.message_id) {
-      posted_set.add(id);
+      postedSet.add(id);
     }
     console.log(response)
   });

@@ -1,19 +1,19 @@
 async function sendMessageToChatwork(message, sender, sendResponse) {
-  const api_key = await getApiKey();
-  const room_id = await getRoomId();
-  const url = "https://api.chatwork.com/v2/rooms/" + room_id + "/messages";
+  const apiKey = await getApiKey();
+  const roomId = await getRoomId();
+  const url = "https://api.chatwork.com/v2/rooms/" + roomId + "/messages";
   const params = new URLSearchParams();
   params.append("body", message);
-  const param = {
+  const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-      "X-ChatWorkToken": api_key
+      "X-ChatWorkToken": apiKey
     },
     body: params
   };
 
-  fetch(url, param)
+  fetch(url, options)
     .then((res) => {
       if (!res.ok) {
         sendResponse(`http status: ${res.status}`);
